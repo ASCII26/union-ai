@@ -12,5 +12,10 @@
     "@types/node": "^22.9.0",
     "typescript": "~5.6.2",
     "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@google/generative-ai": "^0.21.0",
+    "openai": "^4.71.1"
   }
 }

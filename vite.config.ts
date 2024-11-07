@@ -1,5 +1,4 @@
-// vite.config.js
-import { resolve } from 'path'
+import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -19,6 +18,11 @@ export default defineConfig({
         //     },
         //   },
         // },
-    }
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, '.'), // 将 @ 设置为当前项目根目录
+        },
+    },
 })
 
