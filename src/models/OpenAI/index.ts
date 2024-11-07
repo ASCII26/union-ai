@@ -1,6 +1,6 @@
-import { CompletionUsage, IInitProviderParams } from "@/types";
+import { Usage, ProviderConfig } from "@/types";
 import openai from "openai";
-export async function OpenAI({ model, onDone, apiKey, messages, maxTokens, onData }: IInitProviderParams) {
+export async function OpenAI({ model, onDone, apiKey, messages, maxTokens, onData }: ProviderConfig) {
     const openAI = new openai({ apiKey, timeout: 10000 });
     const responseStream = await openAI.chat.completions.create({
         model,
@@ -14,11 +14,11 @@ export async function OpenAI({ model, onDone, apiKey, messages, maxTokens, onDat
 
     console.log('=======chat stream start=======');
 
-    let usageInfo: CompletionUsage | undefined;
+    let usageInfo: Usage | undefined;
     for await (const chunk of responseStream) {
         console.log('====chunk', JSON.stringify(chunk));
         const content = chunk.choices[0]?.delta?.content || '';
-        usageInfo = chunk.usage as CompletionUsage;
+        usageInfo = chunk.usage as Usage;
         if (content) {
             await onData(chunk);
         }

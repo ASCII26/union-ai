@@ -1,6 +1,8 @@
-import { IInitProviderParams } from "@/types/index";
+import { ProviderMaxToken } from "@/src/const";
+import { ProviderConfig } from "@/types/index";
 import Anthropic from "@anthropic-ai/sdk";
-export async function Claude({ model, apiKey, messages, maxTokens, onData, onDone }: IInitProviderParams) {
+
+export async function Claude({ model, apiKey, messages, maxTokens, onData, onDone }: ProviderConfig) {
     const client = new Anthropic({ apiKey });
 
     console.log('====chat stream start=====');
@@ -33,7 +35,8 @@ export async function Claude({ model, apiKey, messages, maxTokens, onData, onDon
     }
 
     const streamInstance = await client.messages.stream({
-        max_tokens: maxTokens,
+        // TODO: 可以在外层统一处理一下这种缺省的参数
+        max_tokens: maxTokens ?? ProviderMaxToken.Claude[model],
         messages: processedMessages,
         model,
         stream: true,

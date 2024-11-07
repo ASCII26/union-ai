@@ -1,6 +1,6 @@
-import { CompletionUsage, IInitProviderParams } from "@/types/index";
+import { Usage, ProviderConfig } from "@/types/index";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-export async function Gemini({ model, onDone, apiKey, messages, onData }: IInitProviderParams) {
+export async function Gemini({ model, onDone, apiKey, messages, onData }: ProviderConfig) {
     const client = new GoogleGenerativeAI(apiKey);
     const generativeModel = client.getGenerativeModel({ model });
     const chat = generativeModel.startChat({
@@ -15,7 +15,7 @@ export async function Gemini({ model, onDone, apiKey, messages, onData }: IInitP
     })
 
 
-    let usageInfo: CompletionUsage | undefined;
+    let usageInfo: Usage | undefined;
     const result = await chat.sendMessageStream(messages[messages.length - 1].content);
     for await (const chunk of result.stream) {
         const content = chunk.text();

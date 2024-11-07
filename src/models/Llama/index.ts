@@ -1,8 +1,8 @@
-import { CompletionUsage, IInitProviderParams } from "@/types";
-import { safeJsonParse } from "@/utils/utils";
+import { Usage, ProviderConfig } from "@/types";
+import { safeJsonParse } from "@/src/utils/functions";
 
 const llamaApiEndpoint = 'https://api.llama-api.com/chat/completions'
-export async function Llama({ model, onDone, apiKey, messages, onData }: IInitProviderParams) {
+export async function Llama({ model, onDone, apiKey, messages, onData }: ProviderConfig) {
     const response = await fetch(llamaApiEndpoint, {
         method: 'POST',
         headers: {
@@ -26,7 +26,7 @@ export async function Llama({ model, onDone, apiKey, messages, onData }: IInitPr
         throw new Error('Failed to get reader from response')
     }
 
-    let usageInfo: CompletionUsage | undefined;
+    let usageInfo: Usage | undefined;
     let buffer = ''
     const decoder = new TextDecoder()
     while (true) {
