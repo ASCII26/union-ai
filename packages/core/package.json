@@ -1,0 +1,33 @@
+{
+  "name": "@unionai/core",
+  "version": "1.0.0-beta.1",
+  "description": "Core functionality for the UAI SDK",
+  "keywords": [
+    "ai",
+    "uai",
+    "UAI",
+    "UnionAI",
+    "unionai"
+  ],
+  "author": {
+    "name": "ascii26",
+    "email": "422920870@qq.com"
+  },
+  "license": "MIT",
+  "main": "./dist/main.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "^4.9.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "openai": "^4.73.1"
+  }
+}

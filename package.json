@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "union-ai",
   "private": true,
   "scripts": {
     "build": "turbo build",
